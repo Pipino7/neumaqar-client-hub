@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -17,7 +18,7 @@ interface DashboardLayoutProps {
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/' },
-  { icon: Users, label: 'Clientes', href: '/customers', active: true },
+  { icon: Users, label: 'Clientes', href: '/customers' },
   { icon: Truck, label: 'Maquinaria', href: '/machinery' },
   { icon: FileText, label: 'Arriendos', href: '/rentals' },
   { icon: Settings, label: 'Configuración', href: '/settings' },
@@ -25,6 +26,17 @@ const menuItems = [
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+
+  const isActive = (href: string) => {
+    if (href === '/') return location.pathname === '/';
+    return location.pathname.startsWith(href);
+  };
+
+  const getPageTitle = () => {
+    const currentItem = menuItems.find(item => isActive(item.href));
+    return currentItem?.label || 'Dashboard';
+  };
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -49,19 +61,19 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         {/* Navigation */}
         <nav className="flex-1 py-4">
           {menuItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.href}
               className={`
                 flex items-center gap-3 px-4 py-3 
                 border-b border-border/50
                 hover:bg-accent transition-colors
-                ${item.active ? 'bg-primary text-primary-foreground' : ''}
+                ${isActive(item.href) ? 'bg-primary text-primary-foreground' : ''}
               `}
             >
               <item.icon className="h-5 w-5 flex-shrink-0" />
               {!collapsed && <span className="font-medium">{item.label}</span>}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -82,7 +94,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <main className="flex-1 flex flex-col">
         {/* Header */}
         <header className="h-16 border-b-2 border-foreground bg-card px-6 flex items-center justify-between">
-          <h2 className="font-semibold text-lg">Gestión de Clientes</h2>
+          <h2 className="font-semibold text-lg">{getPageTitle()}</h2>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground">Admin</span>
             <div className="w-8 h-8 border-2 border-foreground bg-accent flex items-center justify-center font-bold">
