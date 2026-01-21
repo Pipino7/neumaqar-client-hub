@@ -1,0 +1,161 @@
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { deliverySchema, DeliveryFormData } from '@/lib/validations/rental';
+import { Rental } from '@/types/rental';
+import { formatDate } from '@/lib/utils/formatters';
+import { cn } from '@/lib/utils';
+import { CalendarIcon, Loader2, Truck } from 'lucide-react';
+import { useState } from 'react';
+
+interface DeliveryModalProps {
+  rental: Rental | null;
+  open: boolean;
+  onClose: () => void;
+  onSubmit: (rentalId: string, data: DeliveryFormData) => void;
+}
+
+export const DeliveryModal = ({ rental, open, onClose, onSubmit }: DeliveryModalProps) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<DeliveryFormData>({
+    resolver: zodResolver(deliverySchema),
+    defaultValues: {
+      fecha: new Date(),
+      observacion: '',
+    },
+  });
+
+  const handleSubmit = async (data: DeliveryFormData) => {
+    if (!rental) return;
+    
+    setIsSubmitting(true);
+    try {
+      onSubmit(rental.id, data);
+      form.reset();
+      onClose();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!rental) return null;
+
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <Truck className="h-5 w-5" />
+            Registrar Entrega
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="bg-muted/50 p-4 rounded-lg mb-4">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Folio:</span>
+            <span className="font-mono font-medium">{rental.folio}</span>
+          </div>
+          <div className="flex justify-between text-sm mt-1">
+            <span className="text-muted-foreground">Cliente:</span>
+            <span className="font-medium">{rental.clienteNombre}</span>
+          </div>
+          <div className="mt-3 pt-3 border-t border-border">
+            <p className="text-sm font-medium mb-2">Equipos a entregar:</p>
+            <ul className="space-y-1">
+              {rental.items.map((item) => (
+                <li key={item.id} className="text-sm text-muted-foreground">
+                  • {item.equipment.nombre} x{item.cantidad}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="fecha"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Fecha y hora de entrega</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            'w-full pl-3 text-left font-normal',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                        >
+                          {field.value ? formatDate(field.value) : 'Seleccionar fecha'}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="observacion"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Observaciones (opcional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Ej: Entrega en obra del cliente, firma recibido..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="flex gap-3 pt-4">
+              <Button type="button" variant="outline" onClick={onClose} className="flex-1">
+                Cancelar
+              </Button>
+              <Button type="submit" disabled={isSubmitting} className="flex-1">
+                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Confirmar entrega
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+  );
+};
