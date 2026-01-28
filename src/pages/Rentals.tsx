@@ -86,7 +86,11 @@ const RentalsPage = () => {
   };
 
   const handlePaymentSubmit = (rentalId: string, data: PaymentFormData) => {
-    addPayment(rentalId, data);
+    addPayment(rentalId, {
+      monto: data.monto,
+      metodo: data.metodo,
+      referencia: data.referencia,
+    });
     toast({
       title: 'Pago registrado',
       description: `Se ha registrado un pago de $${data.monto.toLocaleString('es-CL')}`,
@@ -102,7 +106,10 @@ const RentalsPage = () => {
   };
 
   const handleDeliverySubmit = (rentalId: string, data: DeliveryFormData) => {
-    markDelivery(rentalId, data);
+    markDelivery(rentalId, {
+      fecha: data.fecha,
+      observacion: data.observacion,
+    });
     toast({
       title: 'Entrega registrada',
       description: 'Los equipos han sido marcados como entregados.',
@@ -118,7 +125,12 @@ const RentalsPage = () => {
   };
 
   const handleReturnSubmit = (rentalId: string, data: ReturnFormData) => {
-    markReturn(rentalId, data);
+    markReturn(rentalId, {
+      fecha: data.fecha,
+      observacion: data.observacion,
+      devolucionParcial: data.devolucionParcial,
+      itemsDevueltos: data.itemsDevueltos,
+    });
     toast({
       title: 'Devolución registrada',
       description: 'Los equipos han sido devueltos correctamente.',
