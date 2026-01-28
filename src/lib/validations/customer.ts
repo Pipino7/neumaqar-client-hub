@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 // Validación de RUT chileno
-const formatRut = (rut: string): string => {
+export const formatRut = (rut: string): string => {
   return rut.replace(/[^0-9kK]/g, '').toUpperCase();
 };
 

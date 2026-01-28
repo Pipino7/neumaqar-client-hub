@@ -7,6 +7,8 @@ export const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
+export const formatCLP = formatCurrency;
+
 export const formatDate = (date: Date | undefined): string => {
   if (!date) return '-';
   return new Intl.DateTimeFormat('es-CL', {
