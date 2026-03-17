@@ -24,10 +24,8 @@ import {
   PieChart,
   Pie,
   Cell,
-  LineChart,
-  Line,
-  Area,
   AreaChart,
+  Area,
   Legend,
 } from 'recharts';
 import { formatCLP } from '@/lib/utils/formatters';
