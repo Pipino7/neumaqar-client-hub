@@ -1,10 +1,8 @@
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   TrendingUp,
-  TrendingDown,
   DollarSign,
   Truck,
   Users,
@@ -13,10 +11,7 @@ import {
   Clock,
   ArrowUpRight,
   ArrowDownRight,
-  Activity,
-  Calendar,
   Wrench,
-  CheckCircle2,
 } from 'lucide-react';
 import {
   BarChart,
