@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Customers from "./pages/Customers";
 import Rentals from "./pages/Rentals";
 import Machinery from "./pages/Machinery";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
