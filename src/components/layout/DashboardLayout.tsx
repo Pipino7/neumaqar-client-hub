@@ -6,7 +6,8 @@ import {
   Settings, 
   LayoutDashboard,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Wallet
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
@@ -21,6 +22,7 @@ const menuItems = [
   { icon: Users, label: 'Clientes', href: '/customers' },
   { icon: Truck, label: 'Maquinaria', href: '/machinery' },
   { icon: FileText, label: 'Arriendos', href: '/rentals' },
+  { icon: Wallet, label: 'Caja', href: '/caja' },
   { icon: Settings, label: 'Configuración', href: '/settings' },
 ];
 
