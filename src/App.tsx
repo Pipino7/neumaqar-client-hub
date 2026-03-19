@@ -8,6 +8,7 @@ import Rentals from "./pages/Rentals";
 import Machinery from "./pages/Machinery";
 import Dashboard from "./pages/Dashboard";
 import Caja from "./pages/Caja";
+import Billing from "./pages/Billing";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
