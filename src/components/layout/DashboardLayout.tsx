@@ -7,7 +7,8 @@ import {
   LayoutDashboard,
   ChevronLeft,
   ChevronRight,
-  Wallet
+  Wallet,
+  Receipt
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
