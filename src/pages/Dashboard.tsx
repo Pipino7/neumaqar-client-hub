@@ -513,7 +513,7 @@ const Dashboard = () => {
                         <p className="text-sm text-muted-foreground">Selecciona maquinarias del panel izquierdo</p>
                       </div>
                     ) : (
-                      <div className="border-2 border-foreground divide-y divide-border max-h-[250px] overflow-y-auto">
+                      <div className="border-2 border-foreground divide-y divide-border flex-1 min-h-0 overflow-y-auto">
                         {rentalItems.map((item) => (
                           <div key={item.id} className="p-3 space-y-2">
                             <div className="flex items-center justify-between">
