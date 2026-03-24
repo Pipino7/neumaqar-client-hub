@@ -380,7 +380,7 @@ const Dashboard = () => {
           <div className="flex-1 min-h-0 overflow-hidden px-8 py-6">
             <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 h-full">
               {/* LEFT: Client Selection */}
-              <div className="space-y-4">
+              <div className="space-y-4 flex flex-col h-full overflow-hidden">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold flex items-center gap-2">
                     <User className="h-4 w-4" />
