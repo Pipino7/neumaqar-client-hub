@@ -7,6 +7,7 @@ import Customers from "./pages/Customers";
 import Rentals from "./pages/Rentals";
 import Machinery from "./pages/Machinery";
 import Dashboard from "./pages/Dashboard";
+import Reportes from "./pages/Reportes";
 import Caja from "./pages/Caja";
 import Billing from "./pages/Billing";
 import NotFound from "./pages/NotFound";
@@ -21,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/reportes" element={<Reportes />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/rentals" element={<Rentals />} />
           <Route path="/machinery" element={<Machinery />} />
