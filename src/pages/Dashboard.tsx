@@ -371,14 +371,14 @@ const Dashboard = () => {
 
       {/* ========== FULL-SCREEN RENTAL CREATION MODAL ========== */}
       <Dialog open={isRentalModalOpen} onOpenChange={setIsRentalModalOpen}>
-        <DialogContent className="max-w-[95vw] w-[1400px] max-h-[90vh] overflow-hidden flex flex-col">
-          <DialogHeader className="pb-4 border-b border-border">
-            <DialogTitle className="text-xl">Nuevo Arriendo</DialogTitle>
+        <DialogContent className="max-w-[98vw] w-[1600px] h-[92vh] overflow-hidden flex flex-col p-0">
+          <DialogHeader className="px-8 pt-6 pb-4 border-b border-border shrink-0">
+            <DialogTitle className="text-2xl">Nuevo Arriendo</DialogTitle>
             <DialogDescription>Complete los datos para crear un nuevo arriendo</DialogDescription>
           </DialogHeader>
 
-          <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-6 py-4">
+          <div className="flex-1 min-h-0 overflow-hidden px-8 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 h-full">
               {/* LEFT: Client Selection */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
