@@ -25,6 +25,7 @@ const menuItems = [
   { icon: FileText, label: 'Arriendos', href: '/rentals' },
   { icon: Receipt, label: 'Facturación', href: '/billing' },
   { icon: Wallet, label: 'Caja', href: '/caja' },
+  { icon: BarChart3, label: 'Reportes', href: '/reportes' },
   { icon: Settings, label: 'Configuración', href: '/settings' },
 ];
 
