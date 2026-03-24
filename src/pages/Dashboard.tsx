@@ -445,8 +445,8 @@ const Dashboard = () => {
               </div>
 
               {/* RIGHT: Equipment */}
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
+              <div className="space-y-4 flex flex-col h-full overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
                   {/* Equipment browser */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
