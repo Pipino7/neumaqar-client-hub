@@ -467,7 +467,7 @@ const Dashboard = () => {
                       />
                     </div>
 
-                    <div className="border-2 border-foreground divide-y divide-border max-h-[350px] overflow-y-auto">
+                    <div className="border-2 border-foreground divide-y divide-border flex-1 min-h-0 overflow-y-auto">
                       {filteredEquipment.map((eq) => {
                         const isAdded = rentalItems.some((i) => i.equipmentId === eq.id);
                         return (
