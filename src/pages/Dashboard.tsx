@@ -498,7 +498,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Selected items */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex flex-col min-h-0">
                     <h3 className="font-bold flex items-center gap-2">
                       <Package className="h-4 w-4" />
                       En este arriendo
