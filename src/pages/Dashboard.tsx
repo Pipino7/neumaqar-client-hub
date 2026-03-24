@@ -422,7 +422,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="space-y-1 max-h-[300px] overflow-y-auto">
+                <div className="space-y-1 flex-1 min-h-0 overflow-y-auto">
                   {filteredClients.map((client) => (
                     <div
                       key={client.id}
