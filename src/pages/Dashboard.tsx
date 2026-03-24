@@ -448,7 +448,7 @@ const Dashboard = () => {
               <div className="space-y-4 flex flex-col h-full overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
                   {/* Equipment browser */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex flex-col min-h-0">
                     <div className="flex items-center justify-between">
                       <h3 className="font-bold flex items-center gap-2">
                         <Truck className="h-4 w-4" />
