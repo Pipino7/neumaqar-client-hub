@@ -588,7 +588,7 @@ const Dashboard = () => {
           </div>
 
           {/* Footer */}
-          <div className="border-t border-border pt-4 flex items-center justify-between">
+          <div className="border-t border-border px-8 py-4 flex items-center justify-between shrink-0">
             <p className="text-sm text-muted-foreground">
               {selectedClient ? `Cliente: ${selectedClient.nombre}` : 'Sin cliente seleccionado'} — {rentalItems.length} equipo(s)
             </p>
