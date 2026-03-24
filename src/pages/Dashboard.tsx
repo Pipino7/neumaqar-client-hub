@@ -371,16 +371,16 @@ const Dashboard = () => {
 
       {/* ========== FULL-SCREEN RENTAL CREATION MODAL ========== */}
       <Dialog open={isRentalModalOpen} onOpenChange={setIsRentalModalOpen}>
-        <DialogContent className="max-w-[95vw] w-[1400px] max-h-[90vh] overflow-hidden flex flex-col">
-          <DialogHeader className="pb-4 border-b border-border">
-            <DialogTitle className="text-xl">Nuevo Arriendo</DialogTitle>
+        <DialogContent className="max-w-[98vw] w-[1600px] h-[92vh] overflow-hidden flex flex-col p-0">
+          <DialogHeader className="px-8 pt-6 pb-4 border-b border-border shrink-0">
+            <DialogTitle className="text-2xl">Nuevo Arriendo</DialogTitle>
             <DialogDescription>Complete los datos para crear un nuevo arriendo</DialogDescription>
           </DialogHeader>
 
-          <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-6 py-4">
+          <div className="flex-1 min-h-0 overflow-hidden px-8 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 h-full">
               {/* LEFT: Client Selection */}
-              <div className="space-y-4">
+              <div className="space-y-4 flex flex-col h-full overflow-hidden">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold flex items-center gap-2">
                     <User className="h-4 w-4" />
@@ -422,7 +422,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="space-y-1 max-h-[300px] overflow-y-auto">
+                <div className="space-y-1 flex-1 min-h-0 overflow-y-auto">
                   {filteredClients.map((client) => (
                     <div
                       key={client.id}
@@ -445,10 +445,10 @@ const Dashboard = () => {
               </div>
 
               {/* RIGHT: Equipment */}
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
+              <div className="space-y-4 flex flex-col h-full overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
                   {/* Equipment browser */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex flex-col min-h-0">
                     <div className="flex items-center justify-between">
                       <h3 className="font-bold flex items-center gap-2">
                         <Truck className="h-4 w-4" />
@@ -467,7 +467,7 @@ const Dashboard = () => {
                       />
                     </div>
 
-                    <div className="border-2 border-foreground divide-y divide-border max-h-[350px] overflow-y-auto">
+                    <div className="border-2 border-foreground divide-y divide-border flex-1 min-h-0 overflow-y-auto">
                       {filteredEquipment.map((eq) => {
                         const isAdded = rentalItems.some((i) => i.equipmentId === eq.id);
                         return (
@@ -498,7 +498,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Selected items */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex flex-col min-h-0">
                     <h3 className="font-bold flex items-center gap-2">
                       <Package className="h-4 w-4" />
                       En este arriendo
@@ -513,7 +513,7 @@ const Dashboard = () => {
                         <p className="text-sm text-muted-foreground">Selecciona maquinarias del panel izquierdo</p>
                       </div>
                     ) : (
-                      <div className="border-2 border-foreground divide-y divide-border max-h-[250px] overflow-y-auto">
+                      <div className="border-2 border-foreground divide-y divide-border flex-1 min-h-0 overflow-y-auto">
                         {rentalItems.map((item) => (
                           <div key={item.id} className="p-3 space-y-2">
                             <div className="flex items-center justify-between">
@@ -588,7 +588,7 @@ const Dashboard = () => {
           </div>
 
           {/* Footer */}
-          <div className="border-t border-border pt-4 flex items-center justify-between">
+          <div className="border-t border-border px-8 py-4 flex items-center justify-between shrink-0">
             <p className="text-sm text-muted-foreground">
               {selectedClient ? `Cliente: ${selectedClient.nombre}` : 'Sin cliente seleccionado'} — {rentalItems.length} equipo(s)
             </p>
