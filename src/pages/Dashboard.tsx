@@ -39,12 +39,10 @@ import {
   Clock,
   CheckCircle2,
   AlertTriangle,
-  Trash2,
   UserPlus,
   User,
   Building2,
   Check,
-  Package,
 } from 'lucide-react';
 import { mockEquipment } from '@/data/mockEquipment';
 import { mockCustomers } from '@/data/mockCustomers';
