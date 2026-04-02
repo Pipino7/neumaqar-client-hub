@@ -91,7 +91,7 @@ const Dashboard = () => {
   // Rental modal state
   const [selectedClient, setSelectedClient] = useState<Customer | null>(null);
   const [clientSearch, setClientSearch] = useState('');
-  const [equipmentSearch, setEquipmentSearch] = useState('');
+  
   const [rentalItems, setRentalItems] = useState<RentalItem[]>([]);
 
   const handleSearch = () => {
