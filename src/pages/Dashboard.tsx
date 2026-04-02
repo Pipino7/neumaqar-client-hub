@@ -146,15 +146,6 @@ const Dashboard = () => {
       (c) => c.estado === 'ACTIVO' && (c.nombre.toLowerCase().includes(q) || c.rut.toLowerCase().includes(q))
     );
   }, [clientSearch]);
-
-  const filteredEquipment = useMemo(() => {
-    if (!equipmentSearch) return mockEquipment.filter((eq) => eq.disponible);
-    const q = equipmentSearch.toLowerCase();
-    return mockEquipment.filter(
-      (eq) => eq.disponible && (eq.nombre.toLowerCase().includes(q) || eq.codigo.toLowerCase().includes(q))
-    );
-  }, [equipmentSearch]);
-
   const addItemToRental = (eq: Equipment) => {
     const exists = rentalItems.find((i) => i.equipmentId === eq.id);
     if (exists) return;
