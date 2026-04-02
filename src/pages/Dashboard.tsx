@@ -184,17 +184,12 @@ const Dashboard = () => {
     );
   };
 
-  const totals = useMemo(() => {
-    const subtotal = rentalItems.reduce((s, i) => s + i.subtotal, 0);
-    const deposito = rentalItems.reduce((s, i) => s + i.deposito * i.cantidad, 0);
-    return { subtotal, deposito, total: subtotal + deposito };
-  }, [rentalItems]);
-
   const handleCreateRental = () => {
     if (!selectedClient || rentalItems.length === 0) return;
+    const total = rentalItems.reduce((s, i) => s + i.subtotal, 0);
     toast({
       title: 'Arriendo creado',
-      description: `Arriendo para ${selectedClient.nombre} con ${rentalItems.length} equipo(s) por ${formatCurrency(totals.total)}`,
+      description: `Arriendo para ${selectedClient.nombre} con ${rentalItems.length} equipo(s) por ${formatCurrency(total)}`,
     });
     setIsRentalModalOpen(false);
     setFoundEquipment(null);
