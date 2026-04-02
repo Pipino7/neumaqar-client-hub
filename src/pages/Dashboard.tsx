@@ -128,7 +128,6 @@ const Dashboard = () => {
     setRentalItems([item]);
     setSelectedClient(null);
     setClientSearch('');
-    setEquipmentSearch('');
     setIsRentalModalOpen(true);
   };
 
