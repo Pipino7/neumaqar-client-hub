@@ -50,6 +50,8 @@ import { Equipment, RentalItem, RateType } from '@/types/rental';
 import { Customer } from '@/types/customer';
 import { formatCurrency, formatCLP } from '@/lib/utils/formatters';
 import { useToast } from '@/hooks/use-toast';
+import { MachineSelectorPanel } from '@/components/rentals/MachineSelectorPanel';
+import { useToast } from '@/hooks/use-toast';
 
 // Mock recent activity
 const recentActivity = [
