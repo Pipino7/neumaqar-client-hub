@@ -443,145 +443,15 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* RIGHT: Equipment */}
-              <div className="space-y-4 flex flex-col h-full overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
-                  {/* Equipment browser */}
-                  <div className="space-y-3 flex flex-col min-h-0">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-bold flex items-center gap-2">
-                        <Truck className="h-4 w-4" />
-                        Maquinarias <span className="text-destructive">*</span>
-                      </h3>
-                      <Badge variant="secondary">{rentalItems.length} seleccionada(s)</Badge>
-                    </div>
-
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        placeholder="Buscar equipo..."
-                        value={equipmentSearch}
-                        onChange={(e) => setEquipmentSearch(e.target.value)}
-                        className="pl-9"
-                      />
-                    </div>
-
-                    <div className="border-2 border-foreground divide-y divide-border flex-1 min-h-0 overflow-y-auto">
-                      {filteredEquipment.map((eq) => {
-                        const isAdded = rentalItems.some((i) => i.equipmentId === eq.id);
-                        return (
-                          <div
-                            key={eq.id}
-                            className={`flex items-center justify-between p-3 transition-colors ${
-                              isAdded ? 'bg-primary/5' : 'hover:bg-muted/50 cursor-pointer'
-                            }`}
-                            onClick={() => !isAdded && addItemToRental(eq)}
-                          >
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <Badge variant="outline" className="text-xs font-mono">{eq.codigo}</Badge>
-                                <span className="text-xs text-muted-foreground">{eq.categoria}</span>
-                              </div>
-                              <p className="font-medium text-sm mt-0.5">{eq.nombre}</p>
-                              <p className="text-xs text-muted-foreground font-mono">{formatCurrency(eq.precioDia)}/día</p>
-                            </div>
-                            {isAdded ? (
-                              <Badge variant="default" className="gap-1"><Check className="h-3 w-3" /> Agregado</Badge>
-                            ) : (
-                              <Button size="sm" variant="outline"><Plus className="h-4 w-4" /></Button>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Selected items */}
-                  <div className="space-y-3 flex flex-col min-h-0">
-                    <h3 className="font-bold flex items-center gap-2">
-                      <Package className="h-4 w-4" />
-                      En este arriendo
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      Inicio: {new Date().toLocaleDateString('es-CL')} {new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' })}
-                    </p>
-
-                    {rentalItems.length === 0 ? (
-                      <div className="border-2 border-dashed border-border p-8 text-center">
-                        <Package className="h-8 w-8 mx-auto text-muted-foreground mb-2 opacity-40" />
-                        <p className="text-sm text-muted-foreground">Selecciona maquinarias del panel izquierdo</p>
-                      </div>
-                    ) : (
-                      <div className="border-2 border-foreground divide-y divide-border flex-1 min-h-0 overflow-y-auto">
-                        {rentalItems.map((item) => (
-                          <div key={item.id} className="p-3 space-y-2">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="font-medium text-sm">{item.equipment.nombre}</p>
-                                <p className="text-xs text-muted-foreground font-mono">{item.equipment.codigo}</p>
-                              </div>
-                              <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={() => removeItemFromRental(item.id)}>
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
-                            </div>
-                            <div className="grid grid-cols-3 gap-2">
-                              <div>
-                                <label className="text-xs text-muted-foreground">Cant.</label>
-                                <Input
-                                  type="number" min={1} value={item.cantidad}
-                                  onChange={(e) => updateRentalItem(item.id, { cantidad: Number(e.target.value) || 1 })}
-                                  className="h-8"
-                                />
-                              </div>
-                              <div>
-                                <label className="text-xs text-muted-foreground">Tarifa</label>
-                                <Select value={item.tarifaTipo} onValueChange={(v) => updateRentalItem(item.id, { tarifaTipo: v as RateType })}>
-                                  <SelectTrigger className="h-8"><SelectValue /></SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="DIA">Día</SelectItem>
-                                    <SelectItem value="SEMANA">Semana</SelectItem>
-                                    <SelectItem value="MES">Mes</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                              </div>
-                              <div>
-                                <label className="text-xs text-muted-foreground">Días</label>
-                                <Input
-                                  type="number" min={1} value={item.diasEstimados}
-                                  onChange={(e) => updateRentalItem(item.id, { diasEstimados: Number(e.target.value) || 1 })}
-                                  className="h-8"
-                                />
-                              </div>
-                            </div>
-                            <div className="text-right text-sm font-mono font-bold">
-                              {formatCurrency(item.subtotal)}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Totals */}
-                    {rentalItems.length > 0 && (
-                      <Card className="bg-muted/50">
-                        <CardContent className="p-3 space-y-1">
-                          <div className="flex justify-between text-sm">
-                            <span>Subtotal:</span>
-                            <span className="font-mono">{formatCurrency(totals.subtotal)}</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span>Garantías:</span>
-                            <span className="font-mono">{formatCurrency(totals.deposito)}</span>
-                          </div>
-                          <div className="flex justify-between font-bold border-t border-border pt-1">
-                            <span>Total:</span>
-                            <span className="font-mono text-lg">{formatCurrency(totals.total)}</span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </div>
-                </div>
+              {/* RIGHT: Equipment - MachineSelectorPanel */}
+              <div className="flex flex-col h-full overflow-hidden">
+                <MachineSelectorPanel
+                  availableEquipment={mockEquipment}
+                  items={rentalItems}
+                  onAddItem={addItemToRental}
+                  onRemoveItem={removeItemFromRental}
+                  onUpdateItem={updateRentalItem}
+                />
               </div>
             </div>
           </div>
