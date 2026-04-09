@@ -12,6 +12,11 @@ import {
   Clock,
   MoreHorizontal,
   Filter,
+  Plus,
+  ChevronDown,
+  Tag,
+  FolderOpen,
+  Settings,
 } from 'lucide-react';
 import {
   DropdownMenu,
