@@ -12,11 +12,17 @@ import {
   Clock,
   MoreHorizontal,
   Filter,
+  Plus,
+  ChevronDown,
+  Tag,
+  FolderOpen,
+  Settings,
 } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -115,10 +121,35 @@ const Machinery = () => {
             <h1 className="text-xl font-semibold">Maquinaria</h1>
             <p className="text-sm text-muted-foreground">{stats.total} equipos registrados</p>
           </div>
-          <Button size="sm" className="gap-2">
-            <Package className="h-4 w-4" />
-            Agregar Equipo
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="sm" className="gap-2">
+                <Plus className="h-4 w-4" />
+                Nuevo
+                <ChevronDown className="h-3 w-3 opacity-60" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem className="gap-2">
+                <Package className="h-4 w-4" />
+                Agregar Equipo
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2">
+                <Tag className="h-4 w-4" />
+                Nueva Marca
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2">
+                <FolderOpen className="h-4 w-4" />
+                Nueva Categoría
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2 text-muted-foreground">
+                <Settings className="h-4 w-4" />
+                Gestionar Marcas y Categorías
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Status Tabs + Search */}
